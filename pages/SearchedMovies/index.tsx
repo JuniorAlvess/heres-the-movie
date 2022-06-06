@@ -16,7 +16,7 @@ const SearchedMovies = () => {
     const router = useRouter();
 
     const { searchResults, countPages, setCountPages, setSearchResults, searched } = useContext(SearchContext);
-    console.log(searched);
+    console.log(searchResults);
     return (
         <div>
             {

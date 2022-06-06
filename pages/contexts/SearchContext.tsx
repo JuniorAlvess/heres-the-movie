@@ -11,6 +11,7 @@ export const SearchContext = createContext({
     setSearched: (searched: any) => { },
     searched: '',
     setSearchResults: (searchResults: any) => { },
+    searchResults: [{} as IMovieCategory],
     setCountPages: (countPages: any) => { },
     countPages: 1,
 });
@@ -40,7 +41,7 @@ const SearchContextProvider = ({ children }: Props) => {
     }
 
     return (
-        <SearchContext.Provider value={{ setSearched, searched, handleSearch, setSearchResults, countPages, setCountPages }}>
+        <SearchContext.Provider value={{ setSearched, searched, handleSearch, setSearchResults, searchResults, countPages, setCountPages }}>
             {children}
         </SearchContext.Provider>
     );

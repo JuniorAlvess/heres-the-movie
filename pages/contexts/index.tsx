@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { FC, ReactNode } from "react";
 import { SearchContextProvider } from './SearchContext';
 
-const GlobalContext = ({ children }) => {
+type GlobalContextProps = {
+    children: ReactNode;
+    
+}
+
+
+const GlobalContext = ({ children }: GlobalContextProps) => {
     return <SearchContextProvider>{children}</SearchContextProvider>
 }
 
