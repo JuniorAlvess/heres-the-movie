@@ -1,0 +1,173 @@
+.resultsContainer {
+    width: 90vw;
+    margin: 10rem auto 0;
+    scroll-margin-top: 150px;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    // background-color: ;
+
+    span:first-child {
+        display: flex;
+        align-items: center;
+        align-self: baseline;
+        gap: 1rem;
+
+        margin-left: 2rem;
+
+        color: var(--textColor);
+        font-size: clamp(1.5rem, 2vw, 2rem);
+        font-weight: bold;
+        font-family: 'Roboto', sans-serif;
+        letter-spacing: 0.05rem;
+
+        svg {
+            font-size: 3rem;
+            color: #fff;
+            cursor: pointer;
+            transition: filter .2s;
+        }
+
+        svg:hover {
+            filter: brightness(.8);
+        }
+    }
+
+    span {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin: 2rem auto;
+
+        color: var(--textColor);
+        font-size: clamp(1rem, 1.5vw, 1.5rem);
+        font-weight: bold;
+        font-family: 'Roboto', sans-serif;
+        letter-spacing: 0.05rem;
+
+        button {
+            background: var(--button);
+            color: var(--textColor);
+            border: none;
+            padding: .3rem .5rem;
+            border-radius: .5rem;
+            font-size: clamp(1rem, 1.5vw, 1.5rem);
+            font-weight: bold;
+            font-family: 'Roboto', sans-serif;
+            letter-spacing: 0.05rem;
+            cursor: pointer;
+            transition: filter .2s;
+
+
+            &:hover {
+                filter: brightness(.8);
+            }
+            &:active {
+                // background-color: var(--button);
+                filter: opacity(60%);
+                
+            }
+
+            &:disabled {
+                filter: brightness(.5);
+                cursor: not-allowed;
+            }
+        }
+    }
+
+    .searchResults {
+        // background-color: #1E5F74;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        padding: 3rem 2rem 2rem;
+        margin: 0 .3rem;
+        cursor: pointer;
+
+
+
+        .slide {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            // span {
+            //     display: flex;
+            //     flex-direction: column;
+            //     align-items: flex-start;
+            //     justify-content: center;
+            //     gap: .5rem;
+
+            //     margin-left: 2rem;
+
+            //     strong {
+            //         font-size: clamp(1rem, 1vw, 2rem);
+            //         font-weight: bold;
+            //         font-family: 'Roboto', sans-serif;
+
+            //         color: var(--textColor);
+            //         text-decoration: underline;
+            //     }
+
+            //     h2 {
+            //         color: var(--textColor);
+            //         font-size: clamp(1.5rem, 2vw, 2rem);
+            //         font-weight: bold;
+            //         font-family: 'Roboto', sans-serif;
+            //         letter-spacing: 0.05rem;
+            //     }
+            // }
+
+            // div {
+            //     position: absolute;
+            //     margin-top: -1.5rem;
+            //     width: 3rem;
+            //     height: 3rem;
+            //     display: flex;
+            //     justify-content: center;
+
+            //     strong {
+            //         position: absolute;
+            //         margin-top: .8rem;
+            //         display: flex;
+            //         justify-content: center;
+            //         align-items: center;
+
+            //         font-size: clamp(1rem, .8vw, 1.7rem);
+            //         font-family: 'Roboto', sans-serif;
+            //     }
+
+            //     svg circle {
+            //         width: 100%;
+            //         height: 100%;
+            //         fill: var(--button);
+            //         stroke-width: 5;
+            //         stroke: rgba(255, 255, 255, 0.05);
+            //         transform: translate(5px, 5px);
+            //         stroke-linecap: round;
+            //     }
+
+            //     svg circle:nth-child(2) {
+            //         stroke: #fff;
+            //         stroke-dasharray: 125px;
+            //     }
+
+            // }
+        }
+
+
+        .movie {
+            margin-bottom: 2rem;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .resultsContainer {
+        width: 100vw;
+        margin: 0 auto;
+    }
+}

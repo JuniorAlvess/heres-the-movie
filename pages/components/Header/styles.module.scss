@@ -1,0 +1,142 @@
+.header {
+    background: -webkit-linear-gradient(#21212c, #16161d, #0b0b0f, var(--background));
+    width: 100vw;
+    position: fixed;
+    padding: 1rem;
+
+    display: flex;
+    align-items: center;
+    z-index: 99999;
+    opacity: 0.9;
+
+    h1 {
+        color: var(--button);
+        font-size: 2.4rem;
+        font-size: clamp(1.4rem, 1.9vw, 2.5rem);
+
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .nav {
+        margin: 0 auto;
+
+        ul {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+
+            li, li>select {
+                text-decoration: none;
+                color: var(--textColor);
+
+                font-size: 1.6rem;
+                font-size: clamp(1.2rem, 1.5vw, 1.7rem);
+                font-weight: bold;
+                font-family: 'Roboto', sans-serif;
+
+                list-style: none;
+                cursor: pointer;
+                transition: all 0.2s ease-in-out;
+
+                a {
+                    color: var(--textColor);
+                    text-decoration: none;
+                }
+
+                &:hover {
+                    filter: opacity(0.7);
+                }
+            }
+
+            li:last-child {
+                &:hover {
+                    filter: none;
+                }
+            }
+
+            li>select {
+                background: transparent;
+                border: none;
+                outline: none;
+            }
+
+            li>input,
+            li>button {
+                font-size: 1rem;
+                font-size: clamp(.5rem, .7vw, 1rem);
+                font-weight: bold;
+                font-family: 'Roboto', sans-serif;
+            }
+
+            li>input {
+                padding: 0.5rem;
+                color: var(--inputColor);
+                border: 1px solid var(--button);
+                border-radius: 1rem 0 0 1rem;
+                outline: none;
+            }
+
+            li>button {
+                background: var(--button);
+                color: var(--textColor);
+                padding: 0.5rem;
+
+                // border: none;
+                border: 1px solid var(--button);
+                border-radius: 0 1rem 1rem 0;
+
+                outline: none;
+                cursor: pointer;
+                transition: all 0.2s ease-in-out;
+
+                &:hover {
+                    filter: opacity(0.7);
+                }
+            }
+        }
+    }
+
+    .user {
+        color: var(--button);
+        // position: absolute;
+        // right: 0;
+        font-size: 2rem;
+
+        // margin-right: 2rem;
+
+        cursor: pointer;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .header {
+        position: relative;
+        // flex-direction: column;
+        flex-wrap: wrap;
+        // align-items: center;
+        justify-content: space-between;
+
+        h1 {
+            order: 1;
+        }
+
+        .user {
+            order: 1;
+        }
+
+        .nav {
+            order: 2;
+            ul {
+                margin-top: 1rem;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            ul>li>input {
+                width: 70vw;
+            }
+
+        }
+    }
+}
