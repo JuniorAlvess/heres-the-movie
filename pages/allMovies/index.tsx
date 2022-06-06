@@ -63,11 +63,11 @@ const AllGenres = ({ genres, movieCategory }: IAllGenresProps) => {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-    const genres = await axios.get<IGenreProps>(`${process.env.apiUrl}/genre/movie/list?api_key=${process.env.apiKey}`);
+    const genres = await axios.get<IGenreProps>(`${process.env.API_URL}/genre/movie/list?api_key=${process.env.API_KEY}`);
     const response = []
     for (let i = 1; i <= 5; i++) {
         let teste = await axios.get<IMovieCategoryProps>(`
-        ${process.env.apiUrl}/discover/movie?api_key=${process.env.apiKey}&with_genres=${genres}&page=${i}`
+        ${process.env.API_URL}/discover/movie?api_key=${process.env.API_KEY}&with_genres=${genres}&page=${i}`
         );
         response.push(teste.data.results);
     }

@@ -5,12 +5,13 @@ import SearchContext from '../../contexts/SearchContext';
 import Link from 'next/link';
 
 const Header = () => {
-    const { handleSearch } = useContext(SearchContext);
-    const [search, setSearch] = useState('');
+    const { setSearch } = useContext(SearchContext);
+    const [inputValue, setInputValue] = useState('');
     const test = () => {
-        if (search.length >= 3) {
+        if (inputValue.length >= 3) {
             // console.log(searchResults);
-            handleSearch(search);
+            // handleSearch(search);
+            setSearch(inputValue);
         }
     }
 
@@ -46,7 +47,7 @@ const Header = () => {
                             name="searchMovie"
                             id="search"
                             placeholder="Buscar"
-                            onChange={(e) => setSearch(e.target.value)}
+                            onChange={(e) => setInputValue(e.target.value)}
                         />
                         <button onClick={() => test()}><Link href="/SearchedMovies">
                             Buscar

@@ -94,7 +94,7 @@ const Home = ({ results, genresStatic, allGenres, movieCategory }: IHomeProps) =
         <link rel="icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Roboto:wght@400;700&display=swap" rel="stylesheet"></link>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
       </Head>
 
       {/* <Header
@@ -198,17 +198,17 @@ export const getStaticProps: GetStaticProps = async () => {
   // try {
     const genreMovies = ['Action', 'Adventure', 'Animation', 'Comedy', 'Drama', 'Family', 'Fantasy', 'Horror', 'Science Fiction'];
 
-    const popular = await axios.get<IPopularProps>(`${process.env.apiUrl}/movie/popular?api_key=${process.env.apiKey}`);
-    const genres = await axios.get<IGenreProps>(`${process.env.apiUrl}/genre/movie/list?api_key=${process.env.apiKey}`);
+    const popular = await axios.get<IPopularProps>(`${process.env.API_URL}/movie/popular?api_key=${process.env.API_KEY}`);
+    const genres = await axios.get<IGenreProps>(`${process.env.API_URL}/genre/movie/list?api_key=${process.env.API_KEY}`);
 
     const movieCategoryPage01 = await axios.get<IMovieCategoryProps>(`
-  ${process.env.apiUrl}/discover/movie?api_key=${process.env.apiKey}&with_genres=${genres.data.genres.filter(genre => genreMovies.includes(genre.name))}&page=1`
+  ${process.env.API_URL}/discover/movie?api_key=${process.env.API_KEY}&with_genres=${genres.data.genres.filter(genre => genreMovies.includes(genre.name))}&page=1`
     );
     const movieCategoryPage02 = await axios.get<IMovieCategoryProps>(`
-  ${process.env.apiUrl}/discover/movie?api_key=${process.env.apiKey}&with_genres=${genres.data.genres.filter(genre => genreMovies.includes(genre.name))}&page=2`
+  ${process.env.API_URL}/discover/movie?api_key=${process.env.API_KEY}&with_genres=${genres.data.genres.filter(genre => genreMovies.includes(genre.name))}&page=2`
     );
     const movieCategoryPage03 = await axios.get<IMovieCategoryProps>(`
-  ${process.env.apiUrl}/discover/movie?api_key=${process.env.apiKey}&with_genres=${genres.data.genres.filter(genre => genreMovies.includes(genre.name))}&page=3`
+  ${process.env.API_URL}/discover/movie?api_key=${process.env.API_KEY}&with_genres=${genres.data.genres.filter(genre => genreMovies.includes(genre.name))}&page=3`
     );
 
     const movieCategory = [...movieCategoryPage01.data.results, ...movieCategoryPage02.data.results, ...movieCategoryPage03.data.results]

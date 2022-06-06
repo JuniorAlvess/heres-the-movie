@@ -1,19 +1,18 @@
 import React, { createContext, useEffect, useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-
-import axios from 'axios';
+// import { useRouter } from 'next/router';
+// import dotenv from  'dotenv'
+// import axios from 'axios';
 import { IMovieCategory } from '../../interfaces'
 
 
 export const SearchContext = createContext({
-    handleSearch: (search: any) => { },
+    setSearch: (search: string) => { },
     setSearched: (searched: any) => { },
     searched: '',
     setSearchResults: (searchResults: any) => { },
-    searchResults: [{} as IMovieCategory],
-    setCountPages: (countPages: any) => { },
-    countPages: 1,
+    // searchResults: [{} as IMovieCategory],
+    searchResults: '',
 });
 
 type Props = {
@@ -22,26 +21,22 @@ type Props = {
 
 const SearchContextProvider = ({ children }: Props) => {
     const [searched, setSearched] = useState<string>('');
-    const [searchResults, setSearchResults] = useState<IMovieCategory[]>([]);
-    const [countPages, setCountPages] = useState<number>(1);
-    const router = useRouter();    
-    // useEffect(() => {
-    //     if(!searched) {
-    //         router.push('/#home');
-    //     }
-    // }, [searched]);
+    // const [searchResults, setSearchResults] = useState<IMovieCategory[]>([]);
+    const [searchResults, setSearchResults] = useState<string>('');
+    // const [countPages, setCountPages] = useState<number>(1);
+    // const router = useRouter();
 
-    async function handleSearch(search: string) {
-        try {
-            const response = await axios.get(`${process.env.apiUrl}/search/movie?api_key=${process.env.apiKey}&query=${search}&page=${countPages}`);
-            setSearchResults(response.data.results);
+    function setSearch(search: string) {
+        // try {
+            // const response = await axios.get(`${process.env.API_URL}/search/movie?api_key=${process.env.API_KEY}&query=${search}&page=${countPages}`);
+            setSearchResults(search);
             setSearched(search);
             document.getElementById('categories')?.scrollIntoView();
-        } catch (error) { console.log(error); }
+        // } catch (error) { console.log(error); }
     }
 
     return (
-        <SearchContext.Provider value={{ setSearched, searched, handleSearch, setSearchResults, searchResults, countPages, setCountPages }}>
+        <SearchContext.Provider value={{ setSearch, setSearched, searched, setSearchResults, searchResults }}>
             {children}
         </SearchContext.Provider>
     );

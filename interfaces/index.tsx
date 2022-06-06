@@ -26,6 +26,7 @@ export interface IMovieCategory {
     title: string;
     poster_path: string;
     vote_average: number;
+    total_pages: number;
 }
 
 export interface IPopularProps {
