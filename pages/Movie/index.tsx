@@ -14,6 +14,7 @@ const Movie = () => {
                 <div>
                     <Image
                         src={miranha}
+                        alt="Movie Image"
                         objectFit="cover"
                     />
                     

@@ -63,26 +63,22 @@ const Home = ({ results, genresStatic, allGenres, movieCategory }: IHomeProps) =
 
   const sendIndex = (boolean: boolean) => {
     if (currentMovie === -resultsLength + 1) {
-      setCurrentMovie(0)
+      setCurrentMovie(0);
       return
     }
     if (!boolean && currentMovie < 0) {
-      setCurrentMovie(-1)
+      setCurrentMovie(-1);
     }
     if (boolean && currentMovie === resultsLength - 1) {
-      setCurrentMovie(0)
+      setCurrentMovie(0);
       return
     }
-    boolean ? setCurrentMovie(currentMovie + 1) : setCurrentMovie(currentMovie - 1)
+    boolean ? setCurrentMovie(currentMovie + 1) : setCurrentMovie(currentMovie - 1);
   }
 
   useEffect(() => {
-    setResultsLength(results.length - 1)
+    setResultsLength(results?.length - 1);
   }, [currentMovie]);
-
-  // useEffect(() => {
-  //   handleSearch()
-  // }, [countPages]);
 
   return (
     <div className={styles.container} id="home">
@@ -114,6 +110,7 @@ const Home = ({ results, genresStatic, allGenres, movieCategory }: IHomeProps) =
                   : currentMovie > 0 ? `${urlImage}${results[currentMovie - 1]?.backdrop_path}`
                     : `${urlImage}${results.at(currentMovie - 1)?.backdrop_path}`
               }
+              alt="Last movie image"
               width={500} height={300}
               objectFit="contain"
               draggable={false}
@@ -126,6 +123,7 @@ const Home = ({ results, genresStatic, allGenres, movieCategory }: IHomeProps) =
                 currentMovie >= 0
                   ? `${urlImage}${results[currentMovie]?.backdrop_path}` : `${urlImage}${results.at(currentMovie)?.backdrop_path}`
               }
+              alt="Current movie image"
               width={500} height={300}
               objectFit="contain"
               draggable={false}
@@ -153,6 +151,7 @@ const Home = ({ results, genresStatic, allGenres, movieCategory }: IHomeProps) =
               src={
                 currentMovie < 0 ? `${urlImage}${results.at(currentMovie + 1)?.backdrop_path}` : `${urlImage}${results[currentMovie + 1]?.backdrop_path}`
               }
+              alt="Next movie image"
               width={500} height={300}
               objectFit="contain"
               draggable={false}
