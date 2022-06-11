@@ -31,11 +31,11 @@ interface IHomeProps {
 const Home = ({ results, genresStatic, allGenres, movieCategory }: IHomeProps) => {
   const [currentMovie, setCurrentMovie] = useState<number>(1);
   const [resultsLength, setResultsLength] = useState<number>(0);
+  
   const [search, setSearch] = useState<string>('');
   const [countPages, setCountPages] = useState<number>(1);
   const [searchResults, setSearchResults] = useState<IMovieCategory[]>([]);
   const [allGenreSelected, setAllGenreSelected] = useState([]);
-  console.log(process.env.API_URL)
 
   const urlImage = 'https://image.tmdb.org/t/p/w500'
 
@@ -79,7 +79,7 @@ const Home = ({ results, genresStatic, allGenres, movieCategory }: IHomeProps) =
 
   useEffect(() => {
     setResultsLength(results?.length - 1);
-  }, [currentMovie]);
+  }, [currentMovie, results?.length]);
 
   return (
     <div className={styles.container} id="home">
