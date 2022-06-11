@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 interface StylesProps {
-    backgroundImage: string;
+    backgroundImage?: string;
 }
 
-export const Container = styled.main`
+const Container = styled.main`
     scroll-margin-top: 150px;
     height: 80vh;
     width: 70vw;
@@ -50,3 +50,5 @@ export const Content = styled.section`
         margin: -5rem auto 0;
     }
 `;
+
+export default Container;

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styles from './styles.module.scss';
 import { FaUserAlt } from 'react-icons/fa';
-import SearchContext from '../../contexts/SearchContext';
+import SearchContext from '../../../contexts/SearchContext';
 import Link from 'next/link';
 
 const Header = () => {

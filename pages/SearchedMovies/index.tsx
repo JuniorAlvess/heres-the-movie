@@ -1,7 +1,7 @@
 import next from 'next';
 import React, { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import SearchContext from '../contexts/SearchContext';
+import SearchContext from '../../contexts/SearchContext';
 import CardCarousel from '../components/CardCarousel';
 import styles from './styles.module.scss';
 

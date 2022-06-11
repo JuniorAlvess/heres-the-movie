@@ -40,3 +40,4 @@ export interface IGenreProps {
 export interface IMovieCategoryProps {
     results: IMovieCategory[];
 }
+

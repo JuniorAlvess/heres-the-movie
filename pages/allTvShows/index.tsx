@@ -74,7 +74,8 @@ export const getStaticProps: GetStaticProps = async () => {
     return {
         props: {
             genres: genres.data.genres,
-            movieCategory: [response.flat()]
+            movieCategory: [response.flat()],
+            fallback: false
         }
     }
 }

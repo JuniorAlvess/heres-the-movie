@@ -214,6 +214,7 @@ export const getStaticProps: GetStaticProps = async () => {
         genresStatic: genres.data.genres.filter(genre => genreMovies.includes(genre.name)),
         allGenres: genres.data.genres,
         movieCategory: movieCategory,
+        fallback: false
       }
     }
   // } catch (error) {
