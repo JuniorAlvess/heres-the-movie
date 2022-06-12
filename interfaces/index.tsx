@@ -29,6 +29,23 @@ export interface IMovieCategory {
     total_pages: number;
 }
 
+export interface IMovieProps {
+    id: number;
+    genres: any[];
+    title: string;
+    poster_path: string;
+    backdrop_path: string;
+    homepage: string;
+    vote_average: number;
+    original_language: string;
+    overview: string;
+    popularity: number;
+    release_date: string;
+    status: string;
+    video: boolean;
+    adult: boolean;
+}
+
 export interface IPopularProps {
     results: IPopular[];
 }
@@ -40,4 +57,5 @@ export interface IGenreProps {
 export interface IMovieCategoryProps {
     results: IMovieCategory[];
 }
+
 

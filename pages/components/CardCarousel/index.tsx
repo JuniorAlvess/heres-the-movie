@@ -13,7 +13,7 @@ const CardCarousel = (props: IProps) => {
     const urlImage = 'https://image.tmdb.org/t/p/w500'
 
     return (
-        <div key={props.categories?.id} className={styles.movie} onClick={() => router.push('Movie')}>
+        <div key={props.categories?.id} className={styles.movie} onClick={() => router.push(`Movie/${[props.categories?.id]}`)}>
             {props.categories?.poster_path && (
                 <>
                     <Image
