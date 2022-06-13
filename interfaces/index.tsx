@@ -29,6 +29,39 @@ export interface IMovieCategory {
     total_pages: number;
 }
 
+export interface IMovieProps {
+    id: number;
+    genres: any[];
+    title: string;
+    tagline: string;
+    poster_path: string;
+    backdrop_path: string;
+    homepage: string;
+    vote_average: number;
+    original_language: string;
+    overview: string;
+    popularity: number;
+    release_date: string;
+    status: string;
+    video: boolean;
+    runtime: number;
+    adult: boolean;
+}
+
+export interface ICast {
+    adult: boolean;
+    gender: number;
+    id: number;
+    known_departament: string;
+    name: string;
+    original_name: string;
+    popularity: number;
+    profile_path: string;
+    cast_id: number;
+    character: string;
+    order: number;
+}
+
 export interface IPopularProps {
     results: IPopular[];
 }
@@ -41,3 +74,6 @@ export interface IMovieCategoryProps {
     results: IMovieCategory[];
 }
 
+export interface IPropsCast {
+    cast: ICast[]
+}
