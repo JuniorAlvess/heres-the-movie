@@ -153,6 +153,7 @@ export const Button = styled(StyledLink)`
 
 export const Overview = styled.p`
     width: clamp(22rem, 35vw, 50vw);
+    margin-bottom: 2rem;
 
     font-size: clamp(1rem, 1.2vw, 1.3rem);
     font-weight: normal;
@@ -167,15 +168,42 @@ export const Cast = styled.aside`
     /* border: 1px solid var(--textColor); */
 
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     gap: 1rem;
     padding-left: 1rem;
     margin-left: 1rem;
     border-left: 1px solid var(--textColor);
     
-    overflow-y: scroll;
-    
+    @media screen and (min-width: 800px) {
+        overflow-y: scroll;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    @media screen and (max-width: 800px) {
+        min-width: 100%;
+        min-height: 18rem;  
+        height: auto;
+
+        margin-left: 0;
+        padding-left: 0;
+        border-left: none;
+        overflow-y: hidden;
+        overflow-x: scroll;
+
+        div {
+            flex-direction: column;
+            gap: 1rem;
+            text-align: center;
+           
+            min-width: 7rem;
+            width: auto;
+            /* border: 1px solid var(--textColor); */
+        }
+
+        div>img {
+            width: 6rem;
+        }
+    }
     ::-webkit-scrollbar {
         background: transparent;
         width: 5px;
@@ -187,19 +215,19 @@ export const Cast = styled.aside`
 `;
 
 export const ImageProfile = styled.img`
-    width: 50px;
+    width: 3.5rem;
     object-fit: contain;
     border-radius: 100%;
 `;
 
 export const CastName = styled.h4`
-    font-size: clamp(1rem, 1.2vw, 1.3rem);
+    font-size: clamp(1.1rem, 1.2vw, 1.3rem);
     font-weight: bold;
     font-family: 'Roboto', sans-serif;
 `;
 
 export const CastCharacter = styled.h5`
-    font-size: clamp(.8rem, .8vw, .9rem);
+    font-size: clamp(.7rem, .8vw, .9rem);
     font-weight: normal;
     font-family: 'Poppins', sans-serif;
 
