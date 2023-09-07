@@ -9,12 +9,6 @@ import { BsFillArrowLeftCircleFill } from 'react-icons/bs'
 import axios from 'axios';
 import { IMovieCategory, IMovieCategoryProps } from '../../interfaces';
 
-/**
- * TODO:
- * - Create a arrow to back to home
- * - Create a pagination
- */
-
 const SearchedMovies = () => {
     const router = useRouter();
     const { searchResults, setSearchResults, searched } = useContext(SearchContext);
@@ -24,15 +18,21 @@ const SearchedMovies = () => {
 
     const handleSearch = async (search: string, countPages = 1) => {
         try {
-            const response = await axios.get<IMovieCategoryProps>(`${process.env.API_URL}/search/movie?api_key=${process.env.API_KEY}&query=${search}&page=${countPages}`);
-
-            setSearchMovieResults(response.data.results);
+            const movieEndpoint = `${process.env.API_URL}/search/movie?api_key=${process.env.API_KEY}&query=${search}&page=${countPages}`;
+            const tvEndpoint = `${process.env.API_URL}/search/tv?api_key=${process.env.API_KEY}&query=${search}&page=${countPages}`;
+            const [movieResponse, tvResponse] = await Promise.all([
+                axios.get<IMovieCategoryProps>(movieEndpoint),
+                axios.get<IMovieCategoryProps>(tvEndpoint)
+            ]);
+            const allResults: any[] = [...movieResponse.data.results, ...tvResponse.data.results];
+            setSearchMovieResults(allResults);
             document.getElementById('categories')?.scrollIntoView();
-        } catch (error) { console.log(error); }
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     useEffect(() => {
-        console.log('test ', searchResults);
         handleSearch(searchResults, countPages);
     }, [searchResults, countPages]); // eslint-disable-line
     return (
