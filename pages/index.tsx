@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { GetStaticProps } from 'next'
+import { useRouter } from 'next/router';
 import Image from 'next/image'
 import Head from 'next/head'
 
@@ -29,6 +30,7 @@ interface IHomeProps {
 }
 
 const Home = ({ results, genresStatic, allGenres, movieCategory }: IHomeProps) => {
+  const router = useRouter();
   const [currentMovie, setCurrentMovie] = useState<number>(1);
   const [resultsLength, setResultsLength] = useState<number>(0);
   
@@ -123,6 +125,7 @@ const Home = ({ results, genresStatic, allGenres, movieCategory }: IHomeProps) =
               width={500} height={300}
               objectFit="contain"
               draggable={false}
+              onClick={() => router.push(`Movie/${[results[currentMovie]?.id]}`)}
             />
 
             <div>
