@@ -11,9 +11,9 @@ import styles from './styles.module.scss';
 
 interface IAllGenresProps {
     genres: IGenre[];
-    movieCategory: IMovieCategory[];
+    tvCategory: IMovieCategory[];
 }
-const AllGenres = ({ genres, movieCategory }: IAllGenresProps) => {
+const AllGenres = ({ genres, tvCategory }: IAllGenresProps) => {
     const responsive = {
         desktop: {
             breakpoint: { max: 3000, min: 1024 },
@@ -46,10 +46,10 @@ const AllGenres = ({ genres, movieCategory }: IAllGenresProps) => {
                                 ssr={true}
                                 infinite={true}
                             >
-                                {movieCategory[0].map(movie => {
+                                {tvCategory[0].map(tv => {
                                     return (
-                                        movie.genre_ids.includes(genre.id) && (
-                                            <CardCarousel key={movie.id} categories={movie} format="TvShow" />
+                                        tv.genre_ids.includes(genre.id) && (
+                                            <CardCarousel key={tv.id} categories={tv} format="TvShow" />
                                         )
                                     )
                                 })}
@@ -63,21 +63,28 @@ const AllGenres = ({ genres, movieCategory }: IAllGenresProps) => {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-    const genres = await axios.get<IGenreProps>(`${process.env.API_URL}/genre/tv/list?api_key=${process.env.API_KEY}`);
-    const response = []
-    for (let i = 1; i <= 5; i++) {
-        let teste = await axios.get<IMovieCategoryProps>(`
-        ${process.env.API_URL}/discover/tv?api_key=${process.env.API_KEY}&with_genres=${genres}&page=${i}`
-        );
-        response.push(teste.data.results);
-    }
+    const apiKey = process.env.API_KEY;
+    const genresResponse = await axios.get<IGenreProps>(
+        `${process.env.API_URL}/genre/tv/list?api_key=${apiKey}`
+    );
+    const genres = genresResponse.data.genres;
+    const tvCategoryPromises = Array.from({ length: 5 }, (_, i) =>
+        axios.get<IMovieCategoryProps>(
+            `${process.env.API_URL}/discover/tv?api_key=${apiKey}&with_genres=${genres}&page=${i + 1}`
+        )
+    );
+
+    const tvCategoryResponses = await Promise.all(tvCategoryPromises);
+    const tvCategory = tvCategoryResponses.map((response) => response.data.results);
     return {
         props: {
-            genres: genres.data.genres,
-            movieCategory: [response.flat()],
-            fallback: false
-        }
-    }
-}
+            genres,
+            tvCategory: [tvCategory.flat()],
+            fallback: false,
+        },
+        revalidate: 60 * 60 * 24
+    };
+};
+
 
 export default AllGenres;
