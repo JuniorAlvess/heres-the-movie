@@ -49,7 +49,7 @@ const Header = () => {
                             placeholder="Buscar"
                             onChange={(e) => setInputValue(e.target.value)}
                         />
-                        <button onClick={() => test()}><Link href="/SearchedMovies">
+                        <button onClick={() => test()}><Link href="/SearchResult">
                             Buscar
                         </Link></button>
                     </li>

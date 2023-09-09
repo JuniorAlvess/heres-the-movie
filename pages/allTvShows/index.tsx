@@ -49,7 +49,7 @@ const AllGenres = ({ genres, movieCategory }: IAllGenresProps) => {
                                 {movieCategory[0].map(movie => {
                                     return (
                                         movie.genre_ids.includes(genre.id) && (
-                                            <CardCarousel key={movie.id} categories={movie} />
+                                            <CardCarousel key={movie.id} categories={movie} format="TvShow" />
                                         )
                                     )
                                 })}
