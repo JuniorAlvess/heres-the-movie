@@ -17,7 +17,7 @@ const Container = styled.main`
 
     @media (max-width: 800px) {
         width: 90vw;
-
+        height: auto;
         flex-direction: column;
     }
 
@@ -168,7 +168,6 @@ export const Cast = styled.aside`
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
     gap: 1rem;
     padding-left: 1rem;
     margin-left: 1rem;
