@@ -62,22 +62,45 @@ const AllGenres = ({ genres, movieCategory }: IAllGenresProps) => {
     );
 }
 
+// export const getStaticProps: GetStaticProps = async () => {
+//     const genres = await axios.get<IGenreProps>(`${process.env.API_URL}/genre/movie/list?api_key=${process.env.API_KEY}`);
+//     const response = []
+//     for (let i = 1; i <= 5; i++) {
+//         let teste = await axios.get<IMovieCategoryProps>(`
+//         ${process.env.API_URL}/discover/movie?api_key=${process.env.API_KEY}&with_genres=${genres}&page=${i}`
+//         );
+//         response.push(teste.data.results);
+//     }
+//     return {
+//         props: {
+//             genres: genres.data.genres,
+//             movieCategory: [response.flat()],
+//             fallback: false
+//         }
+//     }
+// }
+
 export const getStaticProps: GetStaticProps = async () => {
-    const genres = await axios.get<IGenreProps>(`${process.env.API_URL}/genre/movie/list?api_key=${process.env.API_KEY}`);
-    const response = []
-    for (let i = 1; i <= 5; i++) {
-        let teste = await axios.get<IMovieCategoryProps>(`
-        ${process.env.API_URL}/discover/movie?api_key=${process.env.API_KEY}&with_genres=${genres}&page=${i}`
-        );
-        response.push(teste.data.results);
-    }
+    const genresResponse = await axios.get<IGenreProps>(
+        `${process.env.API_URL}/genre/movie/list?api_key=${process.env.API_KEY}`
+    );
+    const genres = genresResponse.data.genres;
+    const movieCategoryPromises = Array.from({ length: 5 }, (_, i) =>
+        axios.get<IMovieCategoryProps>(
+            `${process.env.API_URL}/discover/movie?api_key=${process.env.API_KEY}&with_genres=${genres}&page=${i + 1}`
+        )
+    );
+    
+    const movieCategoryResponses = await Promise.all(movieCategoryPromises);
+    const movieCategory = movieCategoryResponses.map((response) => response.data.results);
     return {
         props: {
-            genres: genres.data.genres,
-            movieCategory: [response.flat()],
-            fallback: false
-        }
-    }
-}
+            genres,
+            movieCategory: [movieCategory.flat()],
+            fallback: false,
+        },
+        revalidate: 60 * 60 * 24
+    };
+};
 
 export default AllGenres;
