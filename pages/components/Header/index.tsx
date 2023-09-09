@@ -3,9 +3,11 @@ import styles from './styles.module.scss';
 import { FaUserAlt } from 'react-icons/fa';
 import SearchContext from '../../../contexts/SearchContext';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const Header = () => {
     const { setSearch } = useContext(SearchContext);
+    const router = useRouter();
     const [inputValue, setInputValue] = useState('');
     const test = () => {
         if (inputValue.length >= 3) {
@@ -17,7 +19,7 @@ const Header = () => {
 
     return (
         <header className={styles.header}>
-            <h1>Here&apos;s The Movie</h1>
+            <h1 onClick={() => router.push('/')}>Here&apos;s The Movie</h1>
             <nav className={styles.nav}>
                 <ul>
                     <li>
