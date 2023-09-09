@@ -191,39 +191,32 @@ const Home = ({ results, genresStatic, allGenres, movieCategory }: IHomeProps) =
   )
 }
 
-
 export const getStaticProps: GetStaticProps = async () => {
-  // try {
-    const genreMovies = ['Action', 'Adventure', 'Animation', 'Comedy', 'Drama', 'Family', 'Fantasy', 'Horror', 'Science Fiction'];
+  const apiURL = process.env.API_URL;
+  const apiKey = process.env.API_KEY;
+  const genreMovies = ['Action', 'Adventure', 'Animation', 'Comedy', 'Drama', 'Family', 'Fantasy', 'Horror', 'Science Fiction'];
+  const genresResponse = await axios.get<IGenreProps>(`${apiURL}/genre/movie/list?api_key=${apiKey}`);
+  const genres = genresResponse.data.genres;
 
-    const popular = await axios.get<IPopularProps>(`${process.env.API_URL}/movie/popular?api_key=${process.env.API_KEY}`);
-    const genres = await axios.get<IGenreProps>(`${process.env.API_URL}/genre/movie/list?api_key=${process.env.API_KEY}`);
+  const [popular, movieCategoryPage01, movieCategoryPage02, movieCategoryPage03] = await Promise.all([
+    axios.get<IPopularProps>(`${apiURL}/movie/popular?api_key=${apiKey}`),
+    axios.get<IMovieCategoryProps>(`${apiURL}/discover/movie?api_key=${apiKey}&with_genres=${genres.filter(genre => genreMovies.includes(genre.name))}&page=1`),
+    axios.get<IMovieCategoryProps>(`${apiURL}/discover/movie?api_key=${apiKey}&with_genres=${genres.filter(genre => genreMovies.includes(genre.name))}&page=2`),
+    axios.get<IMovieCategoryProps>(`${apiURL}/discover/movie?api_key=${apiKey}&with_genres=${genres.filter(genre => genreMovies.includes(genre.name))}&page=3`)
+  ]);
 
-    const movieCategoryPage01 = await axios.get<IMovieCategoryProps>(`
-  ${process.env.API_URL}/discover/movie?api_key=${process.env.API_KEY}&with_genres=${genres.data.genres.filter(genre => genreMovies.includes(genre.name))}&page=1`
-    );
-    const movieCategoryPage02 = await axios.get<IMovieCategoryProps>(`
-  ${process.env.API_URL}/discover/movie?api_key=${process.env.API_KEY}&with_genres=${genres.data.genres.filter(genre => genreMovies.includes(genre.name))}&page=2`
-    );
-    const movieCategoryPage03 = await axios.get<IMovieCategoryProps>(`
-  ${process.env.API_URL}/discover/movie?api_key=${process.env.API_KEY}&with_genres=${genres.data.genres.filter(genre => genreMovies.includes(genre.name))}&page=3`
-    );
+  const movieCategory = [...movieCategoryPage01.data.results, ...movieCategoryPage02.data.results, ...movieCategoryPage03.data.results];
 
-    const movieCategory = [...movieCategoryPage01.data.results, ...movieCategoryPage02.data.results, ...movieCategoryPage03.data.results]
-
-    return {
-      props: {
-        results: popular.data.results,
-        genresStatic: genres.data.genres.filter(genre => genreMovies.includes(genre.name)),
-        allGenres: genres.data.genres,
-        movieCategory: movieCategory,
-        fallback: false
-      }
-    }
-  // } catch (error) {
-  //   console.log('This error ', error);
-  // }
-
-}
+  return {
+    props: {
+      results: popular.data.results,
+      genresStatic: genres.filter(genre => genreMovies.includes(genre.name)),
+      allGenres: genres,
+      movieCategory: movieCategory,
+      fallback: false
+    },
+    revalidate: 60 * 60 * 24
+  };
+};
 
 export default Home;

@@ -3,25 +3,28 @@ import styles from './styles.module.scss';
 import { FaUserAlt } from 'react-icons/fa';
 import SearchContext from '../../../contexts/SearchContext';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const Header = () => {
     const { setSearch } = useContext(SearchContext);
+    const router = useRouter();
     const [inputValue, setInputValue] = useState('');
-    const test = () => {
+    const handleSearch = () => {
         if (inputValue.length >= 3) {
-            // console.log(searchResults);
-            // handleSearch(search);
+            ;
             setSearch(inputValue);
+            router.push('/SearchResult');
+            setInputValue('');
         }
     }
 
     return (
         <header className={styles.header}>
-            <h1>Here&apos;s The Movie</h1>
+            <h1 onClick={() => router.push('/')}>Here&apos;s The Movie</h1>
             <nav className={styles.nav}>
                 <ul>
                     <li>
-                        <Link href="/#home">
+                        <Link href="/">
                             Home
                         </Link>
                     </li>
@@ -47,11 +50,15 @@ const Header = () => {
                             name="searchMovie"
                             id="search"
                             placeholder="Buscar"
+                            value={inputValue}
                             onChange={(e) => setInputValue(e.target.value)}
                         />
-                        <button onClick={() => test()}><Link href="/SearchResult">
+                        <button
+                            disabled={inputValue.length < 3}
+                            onClick={() => handleSearch()}
+                        >
                             Buscar
-                        </Link></button>
+                        </button>
                     </li>
                 </ul>
             </nav >
