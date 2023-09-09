@@ -9,11 +9,12 @@ const Header = () => {
     const { setSearch } = useContext(SearchContext);
     const router = useRouter();
     const [inputValue, setInputValue] = useState('');
-    const test = () => {
+    const handleSearch = () => {
         if (inputValue.length >= 3) {
-            // console.log(searchResults);
-            // handleSearch(search);
+            ;
             setSearch(inputValue);
+            router.push('/SearchResult');
+            setInputValue('');
         }
     }
 
@@ -23,7 +24,7 @@ const Header = () => {
             <nav className={styles.nav}>
                 <ul>
                     <li>
-                        <Link href="/#home">
+                        <Link href="/">
                             Home
                         </Link>
                     </li>
@@ -49,11 +50,15 @@ const Header = () => {
                             name="searchMovie"
                             id="search"
                             placeholder="Buscar"
+                            value={inputValue}
                             onChange={(e) => setInputValue(e.target.value)}
                         />
-                        <button onClick={() => test()}><Link href="/SearchResult">
+                        <button
+                            disabled={inputValue.length < 3}
+                            onClick={() => handleSearch()}
+                        >
                             Buscar
-                        </Link></button>
+                        </button>
                     </li>
                 </ul>
             </nav >
