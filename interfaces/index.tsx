@@ -27,6 +27,7 @@ export interface IMovieCategory {
     poster_path: string;
     vote_average: number;
     total_pages: number;
+    isTvShow?: boolean;
 }
 
 export interface IMovieProps {

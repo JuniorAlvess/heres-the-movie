@@ -5,16 +5,18 @@ import styles from './styles.module.scss';
 import Carousel from "react-multi-carousel";
 import VoteAverage from '../VoteAverage';
 import { IMovieCategory } from '../../../interfaces'
+import { format } from 'path';
 
 interface IProps {
     categories: IMovieCategory
+    format?: string
 }
 const CardCarousel = (props: IProps) => {
     const router = useRouter();
     const urlImage = 'https://image.tmdb.org/t/p/w500'
 
     return (
-        <div key={props.categories?.id} className={styles.movie} onClick={() => router.push(`Movie/${[props.categories?.id]}`)}>
+        <div key={props.categories?.id} className={styles.movie} onClick={() => router.push(`${props?.format || 'Movie'}/${[props.categories?.id]}`)}>
             {props.categories?.poster_path && (
                 <>
                     <Image
