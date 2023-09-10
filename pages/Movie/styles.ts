@@ -9,7 +9,7 @@ interface StylesProps {
 
 const Container = styled.main`
     width: 70vw;
-    height: 60vh;
+    height: 70vh;
 
     display: flex;
     
@@ -176,7 +176,6 @@ export const Cast = styled.aside`
     @media screen and (min-width: 800px) {
         overflow-y: scroll;
         flex-direction: column;
-        justify-content: center;
     }
 
     @media screen and (max-width: 800px) {
